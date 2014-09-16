@@ -49,6 +49,12 @@ if not PY3:
         pass
 
     try:
+        from chaussette.backend import _fastgevent_fs
+        _backends['fastgevent_fs'] = _fastgevent_fs.Server
+    except ImportError:
+        pass
+
+    try:
         from chaussette.backend import _geventwebsocket
         _backends['geventwebsocket'] = _geventwebsocket.Server
     except ImportError:
