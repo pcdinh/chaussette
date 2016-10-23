@@ -15,7 +15,7 @@ class GeventRequestHandler(WSGIHandler):
         try:
             length = self.response_length or '-'
             code = (getattr(self, 'status', None) or '000').split()[0]
-            client_address = self.client_address[0] if isinstance(self.client_address, tuple) else self.client_address
+            client_address = self.get_environ()['HTTP_X_REAL_IP']
             logger._log(logging.INFO,
                         '%s - - %s' % (client_address or '-',
                                        '"%s" %s %s [%sms]' % (getattr(self, 'requestline', ''),
